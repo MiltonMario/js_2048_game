@@ -22,7 +22,6 @@ export default class Game {
    */
   constructor(initialState) {
     // eslint-disable-next-line no-console
-    console.log(initialState);
 
     this.board = initialState || [
       [0, 0, 0, 0],
@@ -42,6 +41,7 @@ export default class Game {
 
     for (let row = 0; row < this.board.length; row++) {
       const numbers = [];
+      const merged = [];
 
       for (let col = 0; col < this.board[row].length; col++) {
         const value = this.board[row][col];
@@ -50,12 +50,15 @@ export default class Game {
           continue;
         } else if (
           numbers.length > 0 &&
-          numbers[numbers.length - 1] === value
+          numbers[numbers.length - 1] === value &&
+          merged[merged.length - 1] !== true
         ) {
           numbers[numbers.length - 1] *= 2;
           this.score += numbers[numbers.length - 1];
+          merged[merged.length - 1] = true;
         } else {
           numbers.push(value);
+          merged.push(false);
         }
       }
 
@@ -77,6 +80,7 @@ export default class Game {
 
     for (let row = 0; row < this.board.length; row++) {
       const numbers = [];
+      const merged = [];
 
       for (let col = this.board[row].length - 1; col >= 0; col--) {
         const value = this.board[row][col];
@@ -85,12 +89,15 @@ export default class Game {
           continue;
         } else if (
           numbers.length > 0 &&
-          numbers[numbers.length - 1] === value
+          numbers[numbers.length - 1] === value &&
+          merged[merged.length - 1] !== true
         ) {
           numbers[numbers.length - 1] *= 2;
           this.score += numbers[numbers.length - 1];
+          merged[merged.length - 1] = true;
         } else {
           numbers.push(value);
+          merged.push(false);
         }
       }
 
@@ -115,6 +122,7 @@ export default class Game {
 
     for (let col = 0; col < this.board.length; col++) {
       const numbers = [];
+      const merged = [];
 
       for (let row = 0; row < this.board.length; row++) {
         const value = this.board[row][col];
@@ -123,12 +131,15 @@ export default class Game {
           continue;
         } else if (
           numbers.length > 0 &&
-          numbers[numbers.length - 1] === value
+          numbers[numbers.length - 1] === value &&
+          merged[merged.length - 1] !== true
         ) {
           numbers[numbers.length - 1] *= 2;
           this.score += numbers[numbers.length - 1];
+          merged[merged.length - 1] = true;
         } else {
           numbers.push(value);
+          merged.push(false);
         }
       }
 
@@ -152,6 +163,7 @@ export default class Game {
 
     for (let col = 0; col < this.board.length; col++) {
       const numbers = [];
+      const merged = [];
 
       for (let row = this.board.length - 1; row >= 0; row--) {
         const value = this.board[row][col];
@@ -160,12 +172,14 @@ export default class Game {
           continue;
         } else if (
           numbers.length > 0 &&
-          numbers[numbers.length - 1] === value
+          numbers[numbers.length - 1] === value &&
+          merged[merged.length - 1] !== true
         ) {
           numbers[numbers.length - 1] *= 2;
           this.score += numbers[numbers.length - 1];
         } else {
           numbers.push(value);
+          merged.push(false);
         }
       }
 
@@ -229,21 +243,14 @@ export default class Game {
     this.status = 'playing';
 
     this.addRandomNumber();
+    this.addRandomNumber();
   }
 
   /**
    * Resets the game.
    */
   restart() {
-    this.board = this.initialState || [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ];
-    this.score = 0;
-    this.status = 'idle';
-    this.start();
+    return this.start();
   }
 
   // Add your own methods here

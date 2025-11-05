@@ -95,6 +95,7 @@ document.addEventListener('keydown', (e) => {
 
   renderBoard();
   updateMessages();
+  updateControls();
 });
 
 button.addEventListener('click', () => {
