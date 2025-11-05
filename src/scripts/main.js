@@ -41,7 +41,7 @@ function updateControls() {
 
   button.classList.remove('start', 'restart');
 
-  if (gameStatus === 'idle') {
+  if (gameStatus === 'start') {
     button.textContent = 'Start';
     button.classList.add('start');
   } else if (gameStatus === 'playing') {
@@ -99,7 +99,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 button.addEventListener('click', () => {
-  if (game.getStatus() === 'idle') {
+  if (game.getStatus() === 'start') {
     game.start();
   } else {
     game.restart();

@@ -32,7 +32,7 @@ export default class Game {
 
     this.size = 4;
     this.score = 0;
-    this.status = 'idle';
+    this.status = 'start';
     this.initialState = initialState;
   }
 
@@ -177,6 +177,7 @@ export default class Game {
         ) {
           numbers[numbers.length - 1] *= 2;
           this.score += numbers[numbers.length - 1];
+          merged[merged.length - 1] = true;
         } else {
           numbers.push(value);
           merged.push(false);
